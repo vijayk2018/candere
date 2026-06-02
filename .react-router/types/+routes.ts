@@ -303,7 +303,7 @@ type RouteFiles = {
     page: "/:locale?/*";
   };
   "../node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout.jsx": {
-    id: "/var/www/html/candere 1/candere/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout";
+    id: "/var/www/html/candere/candere/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout";
     page: "/graphiql" | "/subrequest-profiler" | "/.well-known/appspecific/com.chrome.devtools.json" | "/";
   };
   "../node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/graphiql.jsx": {
@@ -356,7 +356,7 @@ type RouteModules = {
   "routes/($locale).cart": typeof import("./app/routes/($locale).cart.tsx");
   "routes/($locale).cart.$lines": typeof import("./app/routes/($locale).cart.$lines.tsx");
   "routes/($locale).$": typeof import("./app/routes/($locale).$.tsx");
-  "/var/www/html/candere 1/candere/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout": unknown;
+  "/var/www/html/candere/candere/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout": unknown;
   "vite/virtual-routes/routes/graphiql": unknown;
   "vite/virtual-routes/routes/subrequest-profiler": unknown;
   "vite/virtual-routes/routes/[.]well-known.appspecific.com[.]chrome[.]devtools[.]json": unknown;

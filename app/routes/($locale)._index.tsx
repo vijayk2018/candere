@@ -444,7 +444,7 @@ export default function Homepage() {
           {/* Column 1 */}
           <div className="flex flex-col gap-4">
             {[charmingRings, dreamyNecklace].map((imgSrc, idx) => (
-              <Link key={`col1-${idx}`} to="/collections" className="group w-full focus:outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
+              <Link key={`col1-${idx}`} to="/collections/diamond-rings" className="group w-full focus:outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
                 <div className="w-full overflow-hidden">
                   <img src={imgSrc} alt="category" className="w-full h-auto block transition-transform duration-700 group-hover:scale-105" />
                 </div>
@@ -455,7 +455,7 @@ export default function Homepage() {
           {/* Column 2 */}
           <div className="flex flex-col gap-4">
             {[prettyPendants, versatileEarrings].map((imgSrc, idx) => (
-              <Link key={`col2-${idx}`} to="/collections" className="group w-full focus:outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
+              <Link key={`col2-${idx}`} to="/collections/pendants" className="group w-full focus:outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
                 <div className="w-full overflow-hidden">
                   <img src={imgSrc} alt="category" className="w-full h-auto block transition-transform duration-700 group-hover:scale-105" />
                 </div>
@@ -466,7 +466,7 @@ export default function Homepage() {
           {/* Column 3 */}
           <div className="flex flex-col gap-4">
             {[chainsofcharm, stylishBracelets].map((imgSrc, idx) => (
-              <Link key={`col3-${idx}`} to="/collections" className="group w-full focus:outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
+              <Link key={`col3-${idx}`} to="/collections/charm" className="group w-full focus:outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
                 <div className="w-full overflow-hidden">
                   <img src={imgSrc} alt="category" className="w-full h-auto block transition-transform duration-700 group-hover:scale-105" />
                 </div>
