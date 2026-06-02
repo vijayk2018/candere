@@ -7,6 +7,7 @@ import {
 } from '@shopify/hydrogen';
 import type {HeaderQuery, CartApiQueryFragment} from 'storefrontapi.generated';
 import {useAside} from '~/components/Aside';
+import candereLogo from '~/assets/CandereLogoWhite.svg';
 
 interface HeaderProps {
   header: HeaderQuery;
@@ -25,17 +26,34 @@ export function Header({
 }: HeaderProps) {
   const {shop, menu} = header;
   return (
-    <header className="header">
-      <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-        <strong>{shop.name}</strong>
-      </NavLink>
-      <HeaderMenu
-        menu={menu}
-        viewport="desktop"
-        primaryDomainUrl={header.shop.primaryDomain.url}
-        publicStoreDomain={publicStoreDomain}
-      />
-      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+    <header className="sticky top-0 z-50 w-full bg-black text-white shadow-md border-b border-gray-800">
+      {/* Announcement Bar */}
+      <div className="w-full bg-cyan-600 text-white overflow-hidden text-xs py-1.5 font-semibold uppercase tracking-wider relative flex items-center h-8">
+        <ul className="flex animate-[marquee_15s_linear_infinite] whitespace-nowrap min-w-full m-0 p-0 items-center h-full">
+          <li className="px-8 whitespace-nowrap">✨ Flat 25% OFF on Making Charges</li>
+          <li className="px-8 whitespace-nowrap">✨ Lifetime Exchange Policy</li>
+          <li className="px-8 whitespace-nowrap">✨ Free Insured Shipping</li>
+          <li className="px-8 whitespace-nowrap">✨ 100% Certified Diamonds</li>
+          {/* Duplicate for seamless loop */}
+          <li className="px-8 whitespace-nowrap" aria-hidden="true">✨ Flat 25% OFF on Making Charges</li>
+          <li className="px-8 whitespace-nowrap" aria-hidden="true">✨ Lifetime Exchange Policy</li>
+          <li className="px-8 whitespace-nowrap" aria-hidden="true">✨ Free Insured Shipping</li>
+          <li className="px-8 whitespace-nowrap" aria-hidden="true">✨ 100% Certified Diamonds</li>
+        </ul>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-3 flex items-center justify-between">
+        <NavLink prefetch="intent" to="/" end className="flex-shrink-0">
+          <img src={candereLogo} alt={shop.name} className="h-8 md:h-10 object-contain" />
+        </NavLink>
+        <HeaderMenu
+          menu={menu}
+          viewport="desktop"
+          primaryDomainUrl={header.shop.primaryDomain.url}
+          publicStoreDomain={publicStoreDomain}
+        />
+        <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+      </div>
     </header>
   );
 }
@@ -61,7 +79,7 @@ export function HeaderMenu({
           end
           onClick={close}
           prefetch="intent"
-          style={activeLinkStyle}
+          className="hover:text-cyan-400 transition-colors"
           to="/"
         >
           Home
@@ -79,12 +97,11 @@ export function HeaderMenu({
             : item.url;
         return (
           <NavLink
-            className="header-menu-item"
+            className="header-menu-item text-sm font-semibold hover:text-cyan-400 transition-colors uppercase tracking-wide whitespace-nowrap"
             end
             key={item.id}
             onClick={close}
             prefetch="intent"
-            style={activeLinkStyle}
             to={url}
           >
             {item.title}
@@ -102,7 +119,7 @@ function HeaderCtas({
   return (
     <nav className="header-ctas" role="navigation">
       <HeaderMenuMobileToggle />
-      <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
+      <NavLink prefetch="intent" to="/account" className="hover:text-cyan-400 transition-colors text-sm font-semibold uppercase tracking-wide">
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
             {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
@@ -130,7 +147,7 @@ function HeaderMenuMobileToggle() {
 function SearchToggle() {
   const {open} = useAside();
   return (
-    <button className="reset" onClick={() => open('search')}>
+    <button className="reset hover:text-cyan-400 transition-colors text-sm font-semibold uppercase tracking-wide mx-4" onClick={() => open('search')}>
       Search
     </button>
   );
@@ -143,6 +160,7 @@ function CartBadge({count}: {count: number}) {
   return (
     <a
       href="/cart"
+      className="hover:text-cyan-400 transition-colors text-sm font-semibold uppercase tracking-wide"
       onClick={(e) => {
         e.preventDefault();
         open('cart');
@@ -226,6 +244,6 @@ function activeLinkStyle({
 }) {
   return {
     fontWeight: isActive ? 'bold' : undefined,
-    color: isPending ? 'grey' : 'black',
+    color: isPending ? 'grey' : 'white',
   };
 }
