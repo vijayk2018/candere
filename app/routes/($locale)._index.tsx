@@ -13,6 +13,7 @@ import stylishBracelets from '~/assets/stylishBracelets.webp';
 import solitaireBanner from '~/assets/BLR-C-548-CANDERE-WEBSITE-BANNER-SOLITAIRE-JEWELLERY.webp';
 import giftBox from '~/assets/Gift-box.webp';
 import peacock from '~/assets/Peacock.jpg';
+import giftSectionBg from '~/assets/GiftSectionbg.png';
 
 // Trust icons
 import certifiedIcon from '~/assets/certified.svg';
@@ -29,6 +30,9 @@ import evilEye from '~/assets/Evil-Eye.webp';
 import honeyBee from '~/assets/Honey-Bee.webp';
 import traditionReimagined from '~/assets/Tradition-Reimagined_100625.webp';
 import curated from '~/assets/Curated_100625.webp';
+import storeSectionBg from '~/assets/StoreSection.webp';
+import directionsIcon from '~/assets/directions.svg';
+import whatsappIcon from '~/assets/whatsapp.svg';
 import solitaire from '~/assets/Solitaire_020725.webp';
 import internationalFlair from '~/assets/international_flair.webp';
 // Phone mockup
@@ -270,6 +274,43 @@ export default function Homepage() {
             );
           })}
         </div>
+      </div>
+    );
+  };
+
+  const StoreList = () => {
+    const [activeStore, setActiveStore] = useState(0);
+    const stores = [
+      { id: 239, name: 'Malad Infiniti Mall', distance: '0.73 km' },
+      { id: 269, name: 'Goregaon MG Road', distance: '2.55 km' }
+    ];
+    return (
+      <div id="list" className="flex flex-col md:flex-row gap-6 justify-center mb-12">
+        {stores.map((store, idx) => (
+          <div
+            key={store.id}
+            onClick={() => setActiveStore(idx)}
+            className="store-card-wrapper store_details flex items-center gap-5 bg-white p-6 rounded-2xl shadow-lg cursor-pointer transition-all duration-200"
+          >
+            <div className="radio-circle w-7 h-7 rounded-full border-2 flex items-center justify-center" style={{ borderColor: activeStore === idx ? '#4abccd' : '#e2e8f0', backgroundColor: 'white' }}>
+              {activeStore === idx && <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#4abccd' }}></div>}
+            </div>
+            <div className="store-card">
+              <div className="location-container flex items-center gap-4 mb-2">
+                <div className="flex items-center gap-2">
+                  <svg className="w-6 h-6 text-slate-800" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
+                  <div className="distance text-base text-slate-700 font-semibold">{store.distance}</div>
+                </div>
+              </div>
+              <div className="place-container">
+                <div className="label text-[11px] text-slate-500 uppercase tracking-widest mb-1">Nearest Store</div>
+                <div className="location text-base font-semibold text-slate-800">{store.name}</div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     );
   };
@@ -538,7 +579,7 @@ export default function Homepage() {
 
 
       {/* Collections You'll Love */}
-      <section className="w-full bg-black py-24 px-4">
+      <section className="w-full bg-black py-32 px-4">
         <style>{`
           @keyframes glowPulseBtn {
             0%, 100% { box-shadow: 0 0 6px 1px rgba(74,188,205,0.3); }
@@ -590,7 +631,7 @@ export default function Homepage() {
 
           <a
             href="/collections"
-            className="btn-glow-teal relative inline-flex items-center justify-center px-12 py-4 text-white font-semibold text-[15px] uppercase rounded-full transition-all duration-300 hover:text-white"
+            className="btn-glow-teal relative inline-flex items-center justify-center px-12 py-4 text-white font-semibold text-[15px] uppercase rounded-full transition-all duration-300 hover:text-white mb-5"
             style={{ letterSpacing: '4px', WebkitTapHighlightColor: 'transparent' }}
           >
             Shop Now!
@@ -606,13 +647,19 @@ export default function Homepage() {
       </section>
 
       {/* Gifts that speak the Occasion */}
-      <section className="w-full bg-white py-16 px-4 relative overflow-hidden">
-        {/* Decorative background elements (white ribbons) */}
-        <div className="absolute inset-0 opacity-50 pointer-events-none"></div>
+      <section className="w-full relative overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={giftSectionBg}
+            alt="Gift Background"
+            className="w-full h-full object-cover"
+          />
+        </div>
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-[32px] font-bold text-slate-800 mb-3" style={{ fontFamily: 'Lato, sans-serif' }}>
+        <div className="max-w-full relative z-10 py-20" style={{ paddingLeft: '5%', paddingRight: '5%' }}>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-[36px] font-bold text-slate-800 mb-3" style={{ fontFamily: 'Lato, sans-serif' }}>
               Gifts that speak the Occasion
             </h2>
             <p className="text-slate-600 text-base" style={{ fontFamily: 'Lato, sans-serif' }}>
@@ -620,19 +667,21 @@ export default function Homepage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             {/* Left: Gift Box Image */}
-            <div className="lg:col-span-4">
-              <img
-                src={giftBox}
-                alt="Gift Box"
-                className="w-full h-auto object-contain"
-              />
+            <div className="w-full lg:w-[48%]">
+              <div className="flex justify-center">
+                <img
+                  src={giftBox}
+                  alt="Gift Box"
+                  className="w-full h-auto max-w-xl object-contain"
+                />
+              </div>
             </div>
 
             {/* Right: Occasion Grid */}
-            <div className="lg:col-span-8">
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="w-full lg:w-[52%]">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
                 {[
                   { icon: birthday, title: 'Birthday', desc: 'Celebrate another year with a thoughtful gift.' },
                   { icon: anniversary, title: 'Anniversary', desc: 'Love and Togetherness.' },
@@ -644,354 +693,177 @@ export default function Homepage() {
                   <Link
                     key={idx}
                     to="/collections"
-                    className="flex flex-col items-center p-6 rounded-xl transition-all duration-300 hover:shadow-md group"
+                    className="flex flex-col items-center p-5 transition-all duration-300 group"
                   >
-                    <div className="w-16 h-16 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                      <img src={occasion.icon} alt={occasion.title} className="w-10 h-10 object-contain" />
+                    <img src={occasion.icon} alt={occasion.title} className="w-18 h-18 object-contain mb-4 group-hover:scale-110 transition-transform" />
+                    <div className="text-center">
+                      <p className="text-2xl font-semibold text-slate-800 mb-2" style={{ fontFamily: 'Lato, sans-serif' }}>
+                        {occasion.title}
+                      </p>
+                      <p className="text-base text-slate-600" style={{ fontFamily: 'Lato, sans-serif' }}>
+                        {occasion.desc}
+                      </p>
                     </div>
-                    <h3 className="text-lg font-semibold text-slate-800 mb-1" style={{ fontFamily: 'Lato, sans-serif' }}>
-                      {occasion.title}
-                    </h3>
-                    <p className="text-sm text-slate-600 text-center" style={{ fontFamily: 'Lato, sans-serif' }}>
-                      {occasion.desc}
-                    </p>
                   </Link>
                 ))}
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-
-      {/* 3. Interactive Video Section */}
-      <section className="bg-slate-900 text-white py-16 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black aspect-video flex items-center justify-center">
-            <video
-              ref={videoRef}
-              src="https://assets.mixkit.co/videos/preview/mixkit-luxury-fashion-jewelry-shopper-handling-ring-41662-large.mp4"
-              className="w-full h-full object-cover"
-              loop
-              muted
-              playsInline
-            />
-            {/* Play/Pause overlay */}
-            <button
-              onClick={toggleVideoPlay}
-              className={`video-play-btn absolute bg-cyan-500/90 hover:bg-cyan-600 text-white p-5 rounded-full shadow-lg transition-colors z-10 flex items-center justify-center ${isVideoPlaying ? 'opacity-80' : ''}`}
-              aria-label={isVideoPlaying ? 'Pause Video' : 'Play Video'}
-            >
-              {isVideoPlaying ? (
-                <svg className="w-8 h-8 fill-current" viewBox="0 0 24 24">
-                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                </svg>
-              ) : (
-                <svg className="w-8 h-8 fill-current translate-x-0.5" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              )}
-            </button>
-            {!isVideoPlaying && (
-              <div className="absolute inset-0 bg-slate-950/40 flex items-end p-6 pointer-events-none">
-                <span className="text-xs tracking-wider uppercase bg-slate-900/80 px-3 py-1.5 rounded-full border border-slate-700">
-                  Preview Store Experience
-                </span>
-              </div>
-            )}
-          </div>
-          <div className="space-y-6 text-left">
-            <span className="text-sm font-semibold tracking-wider text-cyan-400 uppercase">
-              Exclusive In-Store Experience
-            </span>
-            <h2 className="text-3xl lg:text-4xl font-serif font-bold text-white">
-              Discover Candere Virtual Try-On & Booking
-            </h2>
-            <p className="text-slate-300">
-              Need personalized advice? Book a video call with our jewelry consultants, or request an in-store reservation at your nearest Kalyan Jewellers showroom to view collections in person.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <button
-                onClick={() => {
-                  const el = document.getElementById('showroom-booking');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-semibold px-8 py-3 rounded-full transition-all"
-              >
-                Book Store Visit
-              </button>
-              <button
-                onClick={() => {
-                  const el = document.getElementById('showroom-booking');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="border border-slate-700 hover:border-cyan-400 hover:text-cyan-400 font-semibold px-8 py-3 rounded-full transition-all"
-              >
-                Video Call Consultant
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Collections & Promotions */}
-      <section className="max-w-7xl mx-auto px-4 py-16">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
-          <div className="text-left">
-            <h2 className="text-3xl lg:text-4xl font-serif font-bold text-slate-900">
-              Collections & Promotions
-            </h2>
-            <div className="w-16 h-1 bg-cyan-500 mt-3 mb-2"></div>
-            <p className="text-slate-600">
-              Explore our custom collections tailored for every story and style.
-            </p>
-          </div>
-          <Link to="/collections" className="text-cyan-600 font-semibold hover:underline mt-4 md:mt-0 inline-flex items-center">
-            View All Collections <span className="ml-1">→</span>
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {[
-            { img: glo, name: 'Glo Collection', desc: 'Dazzling everyday wear' },
-            { img: aruna, name: 'Aruna Collection', desc: 'Traditional golden shine' },
-            { img: traditionReimagined, name: 'Tradition Reimagined', desc: 'Craft heritage reborn' },
-            { img: curated, name: 'Curated Selection', desc: 'Handpicked favorites' },
-            { img: solitaire, name: 'Solitaire Shine', desc: 'Gems of absolute purity' },
-          ].map((col, idx) => (
-            <Link
-              key={idx}
-              to="/collections"
-              className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300"
-            >
-              <div className="aspect-square overflow-hidden bg-slate-50 relative">
-                <img
-                  src={col.img}
-                  alt={col.name}
-                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-sm text-white text-xxs px-2.5 py-1 rounded-full uppercase tracking-wider">
-                  New Arrival
-                </div>
-              </div>
-              <div className="p-5 text-left flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="font-serif font-bold text-lg text-slate-900 group-hover:text-cyan-600 transition-colors">
-                    {col.name}
-                  </h3>
-                  <p className="text-slate-500 text-xs mt-1">{col.desc}</p>
-                </div>
-                <span className="text-cyan-600 text-sm font-semibold mt-4 inline-flex items-center">
-                  Explore <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* 5. Why Trust Candere Section */}
-      <section className="bg-slate-100 py-16 border-y border-slate-200">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-serif font-bold text-slate-900">
-              Why Trust Candere?
-            </h2>
-            <div className="w-16 h-1 bg-cyan-500 mx-auto mt-3 mb-4"></div>
-            <p className="text-slate-600 max-w-xl mx-auto">
-              Our assurance of fine craftsmanship, authenticated gems, and customer care.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left box */}
-            <div className="lg:col-span-5 flex justify-center">
-              <div className="relative max-w-sm rounded-2xl overflow-hidden shadow-xl bg-white p-6 border border-slate-200/80 group">
-                <img
-                  src={giftBox}
-                  alt="Luxury Blue Candere Gift Box"
-                  className="w-full h-auto object-cover transform group-hover:scale-102 transition-transform duration-500"
-                />
-                <div className="mt-4 text-center">
-                  <h4 className="font-serif font-bold text-lg text-slate-900">Premium Packaging</h4>
-                  <p className="text-slate-500 text-xs mt-1">
-                    Every piece is sent with specialized care in secure, luxury packaging.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Right badges */}
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {[
-                {
-                  icon: exchangeIcon,
-                  title: 'Lifetime Exchange',
-                  desc: 'Upgrade your jewelry anytime with our customer exchange assurance policy.',
-                },
-                {
-                  icon: certifiedIcon,
-                  title: '100% Certified',
-                  desc: 'Every gemstone & diamond is fully certified by internationally recognized labs.',
-                },
-                {
-                  icon: returnIcon,
-                  title: 'Easy Returns',
-                  desc: 'Hassle-free 15-day return policy to buy jewelry with complete confidence.',
-                },
-                {
-                  icon: shippingIcon,
-                  title: 'Free Shipping',
-                  desc: 'Fully insured, complimentary shipping directly to your doorstep across India.',
-                },
-                {
-                  icon: refundIcon,
-                  title: 'Secure Payments',
-                  desc: '100% encrypted, secure transactions with multiple payment methods supported.',
-                },
-                {
-                  icon: trustIcon,
-                  title: 'Trusted Brand',
-                  desc: 'Backed by the legacy of Kalyan Jewellers for guaranteed honesty and trust.',
-                },
-              ].map((trust, idx) => (
-                <div
-                  key={idx}
-                  className="flex gap-4 p-5 bg-white rounded-xl border border-slate-200/60 shadow-sm"
+              {/* Find It Here Button */}
+              <div className="flex justify-center">
+                <a
+                  href="/collections"
+                  className="relative inline-flex items-center justify-center px-12 py-3 mt-8 text-white text-[14px] font-semibold tracking-[2px] uppercase rounded-full group overflow-hidden transition-all duration-300"
+                  style={{
+                    WebkitTapHighlightColor: 'transparent',
+                    letterSpacing: '2px',
+                    minWidth: '160px',
+                    border: '1.5px solid #4abccd',
+                    animation: 'glowPulse 2s ease-in-out infinite',
+                    backgroundColor: '#000000'
+                  }}
                 >
-                  <div className="w-12 h-12 flex-shrink-0 bg-cyan-50 rounded-full flex items-center justify-center p-2.5">
-                    <img src={trust.icon} alt={trust.title} className="w-full h-full object-contain" />
-                  </div>
-                  <div className="text-left">
-                    <h3 className="font-bold text-slate-900 text-base">{trust.title}</h3>
-                    <p className="text-slate-500 text-xs mt-1 leading-relaxed">{trust.desc}</p>
-                  </div>
-                </div>
-              ))}
+                  {/* Hover fill */}
+                  <span
+                    className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-500"
+                    style={{ background: '#4abccd' }}
+                  />
+                  <span className="relative z-10 text-white">Find it here!</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 6. Virtual Showrooms & callback Forms */}
-      <section id="showroom-booking" className="max-w-7xl mx-auto px-4 py-16">
-        <div className="bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-slate-800 p-8 lg:p-12 relative">
-
-          <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-          <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12">
-
-            {/* Find showroom form */}
-            <div className="space-y-6 text-left lg:border-r lg:border-slate-800 lg:pr-12">
-              <span className="text-sm font-semibold tracking-wider text-cyan-400 uppercase">
-                Locate Us
-              </span>
-              <h3 className="text-2xl lg:text-3xl font-serif font-bold text-white">
-                Visit Our Showrooms
-              </h3>
-              <p className="text-slate-400 text-sm">
-                Explore the touch and feel of luxury. Enter your pin code to discover the nearest Candere or Kalyan Jewellers showroom in your city.
-              </p>
-
-              <form onSubmit={handleSearchStores} className="flex gap-3 mt-4">
-                <input
-                  type="text"
-                  placeholder="Enter Pin Code (e.g. 400001)"
-                  value={pinCode}
-                  onChange={(e) => setPinCode(e.target.value)}
-                  className="bg-slate-800/80 border border-slate-700 text-white rounded-xl px-4 py-3 flex-1 focus:outline-none focus:border-cyan-400 transition-colors placeholder:text-slate-500"
-                />
-                <button
-                  type="submit"
-                  className="bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-semibold px-6 py-3 rounded-xl transition-all"
-                >
-                  Find Stores
-                </button>
-              </form>
-
-              {showroomResults.length > 0 && (
-                <div className="space-y-3 mt-6 bg-slate-800/40 p-4 rounded-xl border border-slate-700/60 animate-fadeIn">
-                  <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider">
-                    Nearby Showrooms found:
-                  </span>
-                  {showroomResults.map((store, index) => (
-                    <div key={index} className="text-slate-300 text-sm flex items-start gap-2">
-                      <span className="text-cyan-500 mt-1">📍</span>
-                      <span>{store}</span>
-                    </div>
-                  ))}
+      {/* Trust & Assurance Section */}
+      <section className="w-full py-16 bg-white">
+        <div className="w-full px-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 w-full">
+            {[
+              { icon: certifiedIcon, title: "Certified Jewellery" },
+              { icon: exchangeIcon, title: "Lifetime Exchange" },
+              { icon: refundIcon, title: "100% Refund*" },
+              { icon: shippingIcon, title: "International Shipping" },
+              { icon: trustIcon, title: "Trust of Kalyan Jewellers" },
+              { icon: returnIcon, title: "15 Day Return" }
+            ].map((item, idx) => (
+              <div key={idx} className="flex flex-col items-center justify-center text-center h-40">
+                <div className="w-14 h-14 flex items-center justify-center mb-4">
+                  <img src={item.icon} alt={item.title} className="w-full h-full object-contain" />
                 </div>
-              )}
-            </div>
+                <p className="text-[10px] text-slate-700 font-medium" style={{ fontFamily: 'Lato, sans-serif' }}>
+                  {item.title}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            {/* Request Callback form */}
-            <div className="space-y-6 text-left lg:pl-4">
-              <span className="text-sm font-semibold tracking-wider text-cyan-400 uppercase">
-                Expert Advice
-              </span>
-              <h3 className="text-2xl lg:text-3xl font-serif font-bold text-white">
-                Talk to our Jewelry Experts
-              </h3>
-              <p className="text-slate-400 text-sm">
-                Book a customized video call. Enter your contact details and our dedicated consultants will call you back to walk you through our best designs.
-              </p>
+      {/* Store Locator Section */}
+      <section id="nh_desktop_store_section" className="w-full relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 rounded-t-[60px] overflow-hidden">
+          <img src={storeSectionBg} alt="Store Background" className="w-full h-auto object-contain rounded-t-[60px]" />
+        </div>
 
-              <form onSubmit={handleRequestCallback} className="flex flex-col gap-4 mt-4">
-                <div className="flex gap-3">
+        <section className="store store_locator relative z-10 py-12 pt-16">
+          <div className="max-w-[1100px] mx-auto px-4 mt-[55px]">
+            <div className="store--wrapper bg-black/70 rounded-2xl px-10 py-12">
+              <div className="insideWrapper">
+                <p className="store--head text-center text-2xl md:text-[32px] font-semibold text-white mb-10" style={{ fontFamily: 'Lato, sans-serif' }}>
+                  Discover the magic In-Person! <br /> at a Store Near You!
+                </p>
+
+                <div className="inputBox flex gap-3 max-w-[480px] mx-auto mb-10">
                   <input
-                    type="tel"
-                    placeholder="Enter Mobile Number"
-                    value={mobileNumber}
-                    onChange={(e) => setMobileNumber(e.target.value)}
-                    required
-                    pattern="[0-9]{10}"
-                    title="Please enter a valid 10-digit mobile number."
-                    className="bg-slate-800/80 border border-slate-700 text-white rounded-xl px-4 py-3 flex-1 focus:outline-none focus:border-cyan-400 transition-colors placeholder:text-slate-500"
+                    type="text"
+                    className="form-control nearBySearch flex-1 px-6 py-4 border border-white rounded-full bg-black/40 text-white placeholder-white/80 focus:outline-none focus:border-cyan-400"
+                    placeholder="Enter Pincode"
                   />
                   <button
                     type="submit"
-                    disabled={callbackRequested}
-                    className="bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-semibold px-6 py-3 rounded-xl transition-all disabled:opacity-50"
+                    className="inputBox-submit locateMe px-7 py-4 bg-white text-black rounded-full font-semibold transition hover:bg-gray-100"
                   >
-                    {callbackRequested ? 'Sending...' : 'Request Call'}
+                    submit
                   </button>
                 </div>
-                <span className="text-slate-500 text-xs text-left">
-                  * By clicking Request Call, you agree to receive automated calls/SMS messages for support.
-                </span>
-              </form>
+
+                <StoreList />
+              </div>
+            </div>
+          </div>
+
+          <div className="store--btnContainer flex flex-col items-center mt-10 relative">
+            <div className="flex items-center w-full justify-center">
+              <div className="flex-1 h-[2px] mx-4" style={{ background: '#4abccd', boxShadow: '0 0 4px #4abccd' }}></div>
+              <button
+                className="primaryBtn btnGlow viewDesign view_design relative inline-flex items-center justify-center px-14 py-4 text-white text-[15px] font-semibold tracking-[2px] uppercase rounded-full cursor-pointer"
+                style={{
+                  background: '#000000',
+                  border: '1.5px solid #4abccd',
+                  animation: 'glowPulse 2s ease-in-out infinite',
+                }}
+                title="Discover NOW!"
+                id="view_design"
+              >
+                Discover NOW!
+              </button>
+              <div className="w-8"></div>
+              <button
+                className="primaryBtn book__appointment btnGlow relative inline-flex items-center justify-center px-14 py-4 text-white text-[15px] font-semibold tracking-[2px] uppercase rounded-full cursor-pointer"
+                title="Book an Appointment"
+                style={{
+                  background: '#000000',
+                  border: '1.5px solid #4abccd',
+                  animation: 'glowPulse 2s ease-in-out infinite',
+                }}
+              >
+                Book an Appointment
+              </button>
+              <div className="flex-1 h-[2px] mx-4" style={{ background: '#4abccd', boxShadow: '0 0 4px #4abccd' }}></div>
             </div>
 
+            {/* Social Icons below buttons */}
+            <div className="store--social flex justify-center gap-3 mt-3" id="shareIt">
+              <a
+                href="https://www.google.com/maps/place/Candere+By+Kalyan+Jewellers+-+Infiniti+Mall,+Malad/@19.184879,72.834614,16z/data=!4m5!3m4!1s0x0:0x4e1b02b2e6e43c6a!8m2!3d19.1848791!4d72.8346139?hl=en"
+                title="Directions"
+                className="store--social-box w-14 h-14 bg-transparent flex items-center justify-center transition-all"
+                id="storeDirection"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src={directionsIcon} alt="Directions" className="w-9 h-9" />
+              </a>
+
+              <a
+                href="https://wa.me/8657007424?text=Hey%20Alia%2C%20Let%E2%80%99s%20Start"
+                target="_blank"
+                rel="noreferrer"
+                title="Whatsapp Us"
+                className="store--social-box w-14 h-14 bg-transparent flex items-center justify-center transition-all"
+                id="storeWhatsapp"
+              >
+                <img src={whatsappIcon} alt="Whatsapp" className="w-9 h-9" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Solitaire Image Section */}
+        <div className="bg-black w-full px-4 py-4 md:px-5 md:py-5">
+          <div className="max-w-[95%] mx-auto rounded-[3.3rem] overflow-hidden">
+            <img
+              src={solitaire}
+              alt="Classy Solitaires"
+              className="w-full h-auto object-cover block"
+            />
           </div>
         </div>
       </section>
 
-      {/* 7. Classy Solitaires Banner */}
-      <section className="relative overflow-hidden w-full h-[320px] lg:h-[400px] bg-slate-950 flex items-center justify-center">
-        <img
-          src={solitaireBanner}
-          alt="Classy Solitaires Showcase Banner"
-          className="absolute inset-0 w-full h-full object-cover opacity-80"
-        />
-        <div className="absolute inset-0 bg-slate-950/40"></div>
-        <div className="relative text-center max-w-xl px-4 space-y-4">
-          <h2 className="text-3xl lg:text-5xl font-serif font-bold text-white tracking-wide">
-            Classy Solitaires
-          </h2>
-          <p className="text-slate-200 text-sm lg:text-base leading-relaxed">
-            Elegance is an attitude. Indulge in our sparkling solitaires that represent absolute luxury and pure beauty.
-          </p>
-          <div className="pt-2">
-            <Link
-              to="/collections"
-              className="bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-semibold px-8 py-3 rounded-full transition-all inline-block shadow-md hover:shadow-lg"
-            >
-              Discover Solitaires
-            </Link>
-          </div>
-        </div>
-      </section>
+
+     
 
       {/* 8. Testimonials Section (Happy Stories) */}
       <section className="max-w-7xl mx-auto px-4 py-16">
