@@ -93,6 +93,12 @@ const COLLECTION_ITEM_FRAGMENT = `#graphql
         ...MoneyCollectionItem
       }
     }
+    offer: metafield(namespace: "custom", key: "offer") {
+      value
+    }
+    productLabel: metafield(namespace: "custom", key: "new_product_label") {
+      value
+    }
   }
 ` as const;
 

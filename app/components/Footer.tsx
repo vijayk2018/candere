@@ -14,168 +14,143 @@ export function Footer({
   publicStoreDomain,
 }: FooterProps) {
   return (
-    <footer className="bg-slate-950 text-slate-300 border-t border-slate-900 pt-16 pb-12 font-sans">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
-        
-        {/* About column */}
-        <div className="space-y-4 text-left">
-          <h3 className="text-white font-serif font-bold text-lg tracking-wide uppercase border-b border-slate-800 pb-2">
-            About Us
-          </h3>
-          <ul className="space-y-2.5 text-sm">
-            <li>
-              <Link to="/pages/about" className="hover:text-cyan-400 transition-colors">
-                Who We Are
-              </Link>
-            </li>
-            <li>
-              <Link to="/pages/about" className="hover:text-cyan-400 transition-colors">
-                Our Story
-              </Link>
-            </li>
-            <li>
-              <Link to="/" className="hover:text-cyan-400 transition-colors">
-                Kalyan Jewellers Trust
-              </Link>
-            </li>
-            <li>
-              <Link to="/blogs/journal" className="hover:text-cyan-400 transition-colors">
-                Press Room & Media
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Products column */}
-        <div className="space-y-4 text-left">
-          <h3 className="text-white font-serif font-bold text-lg tracking-wide uppercase border-b border-slate-800 pb-2">
-            Our Products
-          </h3>
-          <ul className="space-y-2.5 text-sm">
-            <li>
-              <Link to="/collections" className="hover:text-cyan-400 transition-colors">
-                Solitaires
-              </Link>
-            </li>
-            <li>
-              <Link to="/collections" className="hover:text-cyan-400 transition-colors">
-                Gold & Diamond Rings
-              </Link>
-            </li>
-            <li>
-              <Link to="/collections" className="hover:text-cyan-400 transition-colors">
-                Chains of Charm
-              </Link>
-            </li>
-            <li>
-              <Link to="/collections" className="hover:text-cyan-400 transition-colors">
-                Gold Coins & Bars
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Services column */}
-        <div className="space-y-4 text-left">
-          <h3 className="text-white font-serif font-bold text-lg tracking-wide uppercase border-b border-slate-800 pb-2">
-            Customer Services
-          </h3>
-          <ul className="space-y-2.5 text-sm">
-            <li>
-              <Link to="/" className="hover:text-cyan-400 transition-colors">
-                Lifetime Exchange
-              </Link>
-            </li>
-            <li>
-              <Link to="/policies/refund-policy" className="hover:text-cyan-400 transition-colors">
-                Easy 15-Day Returns
-              </Link>
-            </li>
-            <li>
-              <Link to="/policies/shipping-policy" className="hover:text-cyan-400 transition-colors">
-                Free Insured Shipping
-              </Link>
-            </li>
-            <li>
-              <Link to="/" className="hover:text-cyan-400 transition-colors">
-                Bespoke Customization
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Policies column */}
-        <div className="space-y-4 text-left">
-          <h3 className="text-white font-serif font-bold text-lg tracking-wide uppercase border-b border-slate-800 pb-2">
-            Policies
-          </h3>
-          <Suspense fallback={<p className="text-xs">Loading policies...</p>}>
-            <Await resolve={footerPromise}>
-              {(footer) => (
-                <ul className="space-y-2.5 text-sm">
-                  {(footer?.menu || FALLBACK_FOOTER_MENU).items.map((item) => {
-                    if (!item.url) return null;
-                    const url =
-                      item.url.includes('myshopify.com') ||
-                      item.url.includes(publicStoreDomain)
-                        ? new URL(item.url).pathname
-                        : item.url;
-                    return (
-                      <li key={item.id}>
-                        <Link to={url} className="hover:text-cyan-400 transition-colors">
-                          {item.title}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
-            </Await>
-          </Suspense>
-        </div>
-
-        {/* Newsletter column */}
-        <div className="space-y-4 text-left">
-          <h3 className="text-white font-serif font-bold text-lg tracking-wide uppercase border-b border-slate-800 pb-2">
-            Newsletter
-          </h3>
-          <p className="text-slate-400 text-xs leading-relaxed">
-            Subscribe to receive exclusive deals, new collection previews, and early access events.
-          </p>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert('Thank you for subscribing to our newsletter!');
-              (e.target as HTMLFormElement).reset();
-            }}
-            className="flex flex-col gap-2.5"
+    <footer className="bg-[#060a13] text-white pt-16 pb-0 font-sans">
+      {/* Get In The Know Section */}
+      <div className="max-w-[1180px] mx-auto px-6 text-center mb-16">
+        <h2 className="text-white text-6xl font-light leading-none mb-6">Get In The Know</h2>
+        <p className="text-white text-[13px] mb-8 max-w-3xl mx-auto">
+          Sign up to our newsletter for information on sales, delightful content and new additions to the collection. :
+        </p>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            alert('Thank you for subscribing!');
+            (e.target as HTMLFormElement).reset();
+          }}
+          className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto"
+        >
+          <input
+            type="email"
+            required
+            placeholder="Your email address"
+            className="bg-[#121724] border border-transparent text-white rounded-full px-6 py-3 text-[12px] w-full md:w-[200px] focus:ring-1 focus:ring-white outline-none placeholder:text-[#777f92]"
+          />
+          <input
+            type="tel"
+            placeholder="Your mobile number"
+            className="bg-[#121724] border border-transparent text-white rounded-full px-6 py-3 text-[12px] w-full md:w-[200px] focus:ring-1 focus:ring-white outline-none placeholder:text-[#777f92]"
+          />
+          <button
+            type="submit"
+            className="bg-white text-black font-semibold px-7 py-3 rounded-full text-[11px] uppercase tracking-[0.15em] hover:bg-gray-200 transition-colors"
           >
-            <input
-              type="email"
-              required
-              placeholder="Your email address"
-              className="bg-slate-900 border border-slate-850 text-white rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-cyan-400 transition-colors"
-            />
-            <button
-              type="submit"
-              className="bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs transition-colors"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
-
+            Subscribe Now
+          </button>
+        </form>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-slate-900 flex flex-col md:flex-row items-center justify-between gap-6">
-        <p className="text-xs text-slate-500">
-          © {new Date().getFullYear()} Candere by Kalyan Jewellers. All rights reserved. Certified Gold & Diamond Online Shopping Store.
-        </p>
-        <div className="flex gap-4 text-slate-400 text-sm">
-          <a href="#" className="hover:text-cyan-400 transition-colors">Facebook</a>
-          <a href="#" className="hover:text-cyan-400 transition-colors">Instagram</a>
-          <a href="#" className="hover:text-cyan-400 transition-colors">Pinterest</a>
-          <a href="#" className="hover:text-cyan-400 transition-colors">Twitter</a>
+      {/* Main Footer Links Grid */}
+      <div className="max-w-[1180px] mx-auto px-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-10 gap-y-12 pb-16">
+        {/* ABOUT US */}
+        <div className="space-y-5">
+          <h3 className="text-white font-medium text-[15px] uppercase tracking-wide">About Us</h3>
+          <ul className="space-y-2.5 text-[13px] text-white">
+            <li><Link to="/pages/about" className="text-white hover:text-white transition-colors">About Our Company</Link></li>
+            <li><Link to="/policies/terms-of-service" className="text-white hover:text-white transition-colors">Terms and Conditions</Link></li>
+            <li><Link to="/policies/privacy-policy" className="text-white hover:text-white transition-colors">Privacy Policy</Link></li>
+            <li><Link to="/pages/faq" className="text-white hover:text-white transition-colors">FAQ</Link></li>
+            <li><Link to="/pages/offers-tc" className="text-white hover:text-white transition-colors">Offers T&Cs</Link></li>
+            <li><Link to="/pages/reviews" className="text-white hover:text-white transition-colors">Customer Reviews</Link></li>
+            <li><Link to="/sitemap" className="text-white hover:text-white transition-colors">Sitemap</Link></li>
+          </ul>
+        </div>
+
+        {/* WHY CANDERE? */}
+        <div className="space-y-5">
+          <h3 className="text-white font-medium text-[15px] uppercase tracking-wide">Why Candere?</h3>
+          <ul className="space-y-2.5 text-[13px] text-white">
+            <li><Link to="/policies/refund-policy" className="text-white hover:text-white transition-colors">15-Day Returns</Link></li>
+            <li><Link to="/policies/refund-policy" className="text-white hover:text-white transition-colors">Cancel & Refund</Link></li>
+            <li><Link to="/" className="text-white hover:text-white transition-colors">Lifetime Exchange</Link></li>
+            <li><Link to="/" className="text-white hover:text-white transition-colors">Certified Jewellery</Link></li>
+            <li><Link to="/" className="text-white hover:text-white transition-colors">Candere Wallet</Link></li>
+          </ul>
+        </div>
+
+        {/* EXPERIENCE CANDERE */}
+        <div className="space-y-5">
+          <h3 className="text-white font-medium text-[15px] uppercase tracking-wide">Experience Candere</h3>
+          <ul className="space-y-2.5 text-[13px] text-white">
+            <li><Link to="/" className="text-white hover:text-white transition-colors">Refer And Earn</Link></li>
+            <li><Link to="/" className="text-white hover:text-white transition-colors">Video Gallery</Link></li>
+            <li><Link to="/account/orders" className="text-white hover:text-white transition-colors">Order Tracking</Link></li>
+            <li><Link to="/" className="text-white hover:text-white transition-colors">Virtual Try On</Link></li>
+          </ul>
+        </div>
+
+        {/* JEWELLERY GUIDES */}
+        <div className="space-y-5">
+          <h3 className="text-white font-medium text-[15px] uppercase tracking-wide">Jewellery Guides</h3>
+          <ul className="space-y-2.5 text-[13px] text-white">
+            <li><Link to="/" className="text-white hover:text-white transition-colors">Diamond Education</Link></li>
+            <li><Link to="/" className="text-white hover:text-white transition-colors">Gemstone Education</Link></li>
+            <li><Link to="/" className="text-white hover:text-white transition-colors">Metal Education</Link></li>
+            <li><Link to="/" className="text-white hover:text-white transition-colors">Size Guide</Link></li>
+            <li><Link to="/" className="text-white hover:text-white transition-colors">Gold Rate Guide</Link></li>
+            <li><Link to="/" className="text-white hover:text-white transition-colors">Jewellery Care</Link></li>
+          </ul>
+        </div>
+
+        {/* CONTACT US */}
+        <div className="space-y-5">
+          <h3 className="text-white font-medium text-[15px] uppercase tracking-wide">Contact Us</h3>
+          <ul className="space-y-2.5 text-[13px] text-white">
+            <li className="text-white">
+              India +91 22 61066262
+              <span className="block text-white mt-1">(9am-7pm, 6 days a week)</span>
+            </li>
+            <li>
+              <a href="mailto:support@candere.com" className="text-white hover:text-white transition-colors">support@candere.com</a>
+            </li>
+            <li><Link to="/" className="text-white hover:text-white transition-colors">Find Experience Centre</Link></li>
+            <li><Link to="/" className="text-white hover:text-white transition-colors">Kalyan Store Locator</Link></li>
+            <li><a href="https://www.kalyanjewellers.net" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white transition-colors">Kalyan Jewellers Website</a></li>
+          </ul>
+        </div>
+
+        {/* FOLLOW US */}
+        <div className="space-y-5">
+          <h3 className="text-white font-medium text-[15px] uppercase tracking-wide">Follow Us</h3>
+          <div className="flex flex-wrap gap-3 max-w-[130px]">
+            <a href="#" className="w-7 h-7 rounded-full bg-[#2f477a] flex items-center justify-center text-white hover:opacity-80 transition-opacity text-[11px] font-semibold">f</a>
+            <a href="#" className="w-7 h-7 rounded-full bg-[#c22f68] flex items-center justify-center text-white hover:opacity-80 transition-opacity text-[10px] font-semibold">ig</a>
+            <a href="#" className="w-7 h-7 rounded-full bg-black flex items-center justify-center text-white hover:opacity-80 transition-opacity text-[11px] font-semibold">X</a>
+            <a href="#" className="w-7 h-7 rounded-full bg-[#d51010] flex items-center justify-center text-white hover:opacity-80 transition-opacity text-[11px] font-semibold">▶</a>
+            <a href="#" className="w-7 h-7 rounded-full bg-[#c62833] flex items-center justify-center text-white hover:opacity-80 transition-opacity text-[11px] font-semibold">p</a>
+            <a href="#" className="w-7 h-7 rounded-full bg-[#121212] flex items-center justify-center text-white hover:opacity-80 transition-opacity text-[11px] font-semibold">w</a>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Bottom Bar */}
+      <div className="border-t border-[#2f3442]">
+        <div className="max-w-[1180px] mx-auto px-6 py-6 flex flex-wrap items-center justify-between gap-6 text-[10px] uppercase tracking-[0.08em]">
+          <div className="flex gap-4 items-center">
+            <span>© 2026 CANDERE.COM . ALL RIGHTS RESERVED.</span>
+            <Link to="/sitemap" className="hover:text-white">SITE MAP</Link>
+          </div>
+
+          <div className="flex items-center gap-5 text-white">
+            <span>WE ACCEPT</span>
+            <div className="flex gap-4 items-center opacity-70 cursor-default text-[9px]">
+              <span className="text-[9px]">VISA</span>
+              <span className="text-[9px]">MC</span>
+              <span className="text-[9px]">PAYTM</span>
+              <span className="text-[9px]">RUPAY</span>
+              <span className="text-[9px]">PAYPAL</span>
+              <span className="text-[9px]">AMEX</span>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
@@ -223,16 +198,3 @@ const FALLBACK_FOOTER_MENU = {
     },
   ],
 };
-
-function activeLinkStyle({
-  isActive,
-  isPending,
-}: {
-  isActive: boolean;
-  isPending: boolean;
-}) {
-  return {
-    fontWeight: isActive ? 'bold' : undefined,
-    color: isPending ? 'grey' : 'white',
-  };
-}
