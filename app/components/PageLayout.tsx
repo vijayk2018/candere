@@ -45,7 +45,7 @@ export function PageLayout({
           publicStoreDomain={publicStoreDomain}
         />
       )}
-      <main>{children}</main>
+      <main style={{ margin: 0, padding: 0, display: 'block', width: '100%' }}>{children}</main>
       <Footer
         footer={footer}
         header={header}

@@ -3,13 +3,25 @@
   --cart-aside-summary-height-with-discount: 300px;
   --cart-aside-summary-height: 250px;
   --grid-item-width: 355px;
-  --header-height: 64px;
+  --header-height: 0px;
   --color-dark: #000;
   --color-light: #fff;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 img {
   border-radius: 4px;
+}
+
+/* Hero banner images — no border-radius, no line-height gap */
+section img.w-full {
+  border-radius: 0;
+  display: block;
 }
 
 /*
@@ -226,14 +238,7 @@ button.reset:hover:not(:has(> *)) {
 * --------------------------------------------------
 */
 .header {
-  align-items: center;
-  background: #fff;
-  display: flex;
-  height: var(--header-height);
-  padding: 0 1rem;
-  position: sticky;
-  top: 0;
-  z-index: 1;
+  /* Overridden by Tailwind classes on the <header> element */
 }
 
 .header-menu-mobile-toggle {
@@ -253,8 +258,9 @@ button.reset:hover:not(:has(> *)) {
   grid-gap: 1rem;
   @media (min-width: 45em) {
     display: flex;
-    grid-gap: 1rem;
-    margin-left: 3rem;
+    grid-gap: 1.5rem;
+    margin-left: 2rem;
+    align-items: center;
   }
 }
 
@@ -643,3 +649,194 @@ button.reset:hover:not(:has(> *)) {
   gap: 0.75rem;
   flex-wrap: wrap;
 }
+
+/* ============================================================
+ * Homepage — Premium Animations & Micro-Interactions
+ * ============================================================ */
+
+/* Fade-in from below on initial load */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.92); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(32px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+/* Utility: animate children staggered */
+.animate-fadeIn { animation: fadeIn 0.45s ease forwards; }
+.animate-fadeInUp { animation: fadeInUp 0.55s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-scaleIn  { animation: scaleIn 0.4s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-slideLeft { animation: slideLeft 0.45s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* Hero image smooth zoom handled via Tailwind group-hover but reinforced here */
+.hero-image-wrapper {
+  overflow: hidden;
+  border-radius: 1rem;
+}
+.hero-image-wrapper img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hero-image-wrapper:hover img {
+  transform: scale(1.04);
+}
+
+/* Category circles — lift and glow on hover */
+.category-card {
+  transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.category-card:hover {
+  box-shadow: 0 8px 30px rgba(25, 182, 201, 0.18);
+  transform: translateY(-4px);
+}
+.category-circle {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.category-card:hover .category-circle {
+  transform: scale(1.1);
+}
+
+/* Collection cards — border glow accent */
+.collection-card {
+  transition: box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1);
+  will-change: transform;
+}
+.collection-card:hover {
+  box-shadow: 0 12px 40px rgba(25, 182, 201, 0.14);
+  transform: translateY(-6px);
+}
+.collection-card img {
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.collection-card:hover img {
+  transform: scale(1.06);
+}
+
+/* Trust badge cards */
+.trust-badge {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.trust-badge:hover {
+  box-shadow: 0 6px 24px rgba(25, 182, 201, 0.12);
+  transform: translateY(-3px);
+}
+
+/* Testimonial cards */
+.testimonial-card {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.testimonial-card:hover {
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
+  transform: translateY(-3px);
+}
+
+/* Instagram grid items */
+.insta-item {
+  overflow: hidden;
+  border-radius: 1rem;
+}
+.insta-item img {
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.insta-item:hover img {
+  transform: scale(1.08);
+}
+.insta-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.insta-item:hover .insta-overlay {
+  opacity: 1;
+}
+
+/* Occasion icons — bounce effect */
+.occasion-icon-wrap {
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.25s ease;
+}
+.occasion-link:hover .occasion-icon-wrap {
+  transform: scale(1.15) translateY(-3px);
+  background: #cffafe;
+}
+
+/* Video play button pulse */
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.5); }
+  70%  { box-shadow: 0 0 0 14px rgba(6, 182, 212, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); }
+}
+.video-play-btn {
+  animation: pulse-ring 2.2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* Newsletter input focus ring */
+.newsletter-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.45);
+  border-color: #06b6d4;
+}
+
+/* Smooth nav underline */
+.nav-link-animated {
+  position: relative;
+}
+.nav-link-animated::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #06b6d4;
+  border-radius: 1px;
+  transition: width 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-link-animated:hover::after,
+.nav-link-animated.active::after {
+  width: 100%;
+}
+
+/* Showroom form glow */
+.showroom-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.35);
+  border-color: #22d3ee;
+}
+
+/* Staggered section entrance */
+.section-fade-1 { animation: fadeInUp 0.5s 0.05s both; }
+.section-fade-2 { animation: fadeInUp 0.5s 0.12s both; }
+.section-fade-3 { animation: fadeInUp 0.5s 0.19s both; }
+.section-fade-4 { animation: fadeInUp 0.5s 0.26s both; }
+.section-fade-5 { animation: fadeInUp 0.5s 0.33s both; }
+.section-fade-6 { animation: fadeInUp 0.5s 0.40s both; }
+
+/* Loading skeleton shimmer (for lazy images) */
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s infinite;
+}
+
